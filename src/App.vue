@@ -1,28 +1,49 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-app-bar
+      app
+      color="primary"
+      dark
+    >
+      <v-btn
+        elevation="2"
+        large
+        @click="registrationMode = true"
+      >
+        Adicionar evento
+      </v-btn>
+    </v-app-bar>
+
+    <v-main>
+      <TheRegistrationForm
+        :registrationMode="registrationMode"
+        @closeModal="registrationMode = false"
+      />
+      <TheCalendar />
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TheCalendar from './components/TheCalendar.vue';
+import TheRegistrationForm from './components/TheRegistrationForm.vue';
 
 export default {
   name: 'App',
+
   components: {
-    HelloWorld
-  }
-}
+    TheCalendar,
+    TheRegistrationForm
+  },
+
+  data: () => ({
+    registrationMode: false
+  }),
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.v-toolbar__content {
+  justify-content: flex-end;
 }
 </style>
